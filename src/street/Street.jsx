@@ -125,9 +125,6 @@ export default function Street() {
 		  textSize(10)
 		  text(p.id, p.x, p.y+3);
 		}*/
-		for (let car of cars) {
-			car.show()
-		}
 		for (let hole of holes) {
 			let t = ""
 			switch (hole.severity) {
@@ -149,6 +146,9 @@ export default function Street() {
 		}
 		if (p5.keyIsPressed && p5.key === "f") {
 			p5.fullscreen(!full)
+		}
+		for (let car of cars) {
+			car.show()
 		}
 	}
 
