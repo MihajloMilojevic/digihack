@@ -1,16 +1,15 @@
 import styles from "./index.module.css";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Map from "../components/Sidebar/Map";
-import Holes from "../components/Sidebar/Holes";
-import News from "../components/Sidebar/News";
-import Streets from "../components/Sidebar/Streets";
-import Stats from "../components/Sidebar/Stats";
 import { useEffect, useState } from "react";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Map from "../components/Map/Map";
+import Holes from "../components/Holes/Holes";
+import News from "../components/News/News";
+import Streets from "../components/Streets/Streets";
+import Stats from "../components/Stats/Stats";
+import Info from "../components/Info/Info";
 
 
-const components = [Map, Holes, News, Streets, Stats]
-
-const components = [Map, Noop, Noop]
+const components = [Map, Holes, News, Streets, Stats, Info]
 
 
 export default function Admin(){

@@ -1,5 +1,5 @@
 import styles from "./Map.module.css";
-import Street from "../street/Street"
+import Street from "../street/Street";
 
 export default function Map({holes, CAR_NUMBER, setHoles}) {
     return(
@@ -17,20 +17,8 @@ export default function Map({holes, CAR_NUMBER, setHoles}) {
                         <p className={styles.mapText}>{holes.length}</p>
                     </div>
                     <div className={styles.statsWrapper}>
-                        <h2 className={styles.maph2}>Broj Zelenih Rupa</h2>
-                        <p className={styles.mapText}>{holes.filter(({severity}) => severity === 1).length}</p>
-                    </div>
-                    <div className={styles.statsWrapper}>
-                        <h2 className={styles.maph2}>Broj Žutih Rupa</h2>
-                        <p className={styles.mapText}>{holes.filter(({severity}) => severity === 2).length}</p>
-                    </div>
-                    <div className={styles.statsWrapper}>
-                        <h2 className={styles.maph2}>Broj Narandžastih Rupa</h2>
-                        <p className={styles.mapText}>{holes.filter(({severity}) => severity === 3).length}</p>
-                    </div>
-                    <div className={styles.statsWrapper}>
-                        <h2 className={styles.maph2}>Broj Crvenih Rupa</h2>
-                        <p className={styles.mapText}>{holes.filter(({severity}) => severity >= 4).length}</p>
+                        <h2 className={styles.maph2}>Broj Ulica pod Nadzorom</h2>
+                        <p className={styles.mapText}>11</p>
                     </div>
                 </div>
                 <div className={styles.mapRight}>
