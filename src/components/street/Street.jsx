@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Sketch from 'react-p5';
 
 let bg;
 
-const holes = []
 let cars = []
-const N = 30;
 const HOLE_PROB = 0.001
 const HOLE_DIST = 10
 let full = false;
@@ -43,7 +41,10 @@ const points = [
 
 
 class Car {
-	constructor(p5, p, speed, red, green, blue) {
+	constructor(p5, holes, setHoles, checkHoles, p, speed, red, green, blue) {
+		this.holes = holes;
+		this.setHoles = setHoles;
+		this.checkHoles = checkHoles;
 		this.p5 = p5;
 		this.currentPos = p;
 		this.speed = speed;
@@ -67,9 +68,9 @@ class Car {
 		this.t += this.speed * (100 / L);  // Adjust the speed if necessary
 
 		const holeee_q = this.p5.random()
-		if (holeee_q <= HOLE_PROB) {
+		if (holeee_q <= HOLE_PROB && this.checkHoles) {
 			let closest = null;
-			for (let h of holes) {
+			for (let h of this.holes) {
 				if (closest == null) {
 					closest = h;
 					continue;
@@ -82,8 +83,9 @@ class Car {
 				closest.severity++;
 			}
 			else {
-				holes.push({ x, y, severity: 1 })
+				this.holes.push({ x, y, severity: 1 })
 			}
+			this.setHoles([...this.holes])
 		}
 
 		// Once t reaches 1, move to the next step
@@ -98,12 +100,23 @@ class Car {
 }
 
 
-export default function Street() {
+export default function Street({ holes, setHoles, CAR_NUMBER }) {
+	const [firstRender, setFirstRender] = React.useState(true)
+	const [p5, setP5] = React.useState(null)
+	useEffect(() => {
+		if (firstRender) {
+			setFirstRender(false)
+			return;
+		}
+		if (p5 == null) return;
+		cars.push(new Car(p5, holes, setHoles, false, points[p5.floor(p5.random(points.length))], p5.random(0.005, 0.01), p5.floor(p5.random(255)), p5.floor(p5.random(255)), p5.floor(p5.random(255))))
+	}, [CAR_NUMBER])
 	const setup = (p5, canvasParentRef) => {
+		setP5(p5)
 		p5.createCanvas(500, 500).parent(canvasParentRef);
 		bg = p5.loadImage(`${process.env.PUBLIC_URL}/ns2.png`)
-		for (let i = 0; i < N; i++) {
-			cars.push(new Car(p5, points[p5.floor(p5.random(points.length))], p5.random(0.005, 0.01), p5.floor(p5.random(255)), p5.floor(p5.random(255)), p5.floor(p5.random(255))))
+		for (let i = 0; i < CAR_NUMBER; i++) {
+			cars.push(new Car(p5, holes, setHoles, true, points[p5.floor(p5.random(points.length))], p5.random(0.005, 0.01), p5.floor(p5.random(255)), p5.floor(p5.random(255)), p5.floor(p5.random(255))))
 		}
 	}
 
@@ -143,9 +156,6 @@ export default function Street() {
 			p5.textSize(15)
 			p5.textAlign(p5.CENTER, p5.CENTER)
 			p5.text(t, hole.x, hole.y)
-		}
-		if (p5.keyIsPressed && p5.key === "f") {
-			p5.fullscreen(!full)
 		}
 		for (let car of cars) {
 			car.show()
