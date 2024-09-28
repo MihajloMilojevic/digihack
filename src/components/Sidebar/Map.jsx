@@ -1,4 +1,5 @@
 import styles from "./Map.module.css";
+import Street from "../../street/Street"
 
 export default function Map(){
     return(
@@ -14,7 +15,7 @@ export default function Map(){
                     <div className={styles.mapText}>7</div>
                 </div>
                 <div className={styles.mapRight}>
-                    <iframe className="mapFrame" width={530} height={550} src="https://editor.p5js.org/MihajloMilojevic/full/M66S-GihY"></iframe>
+                    <Street />
                 </div>
             </div>
         </div>
