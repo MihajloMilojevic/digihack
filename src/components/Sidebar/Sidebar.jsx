@@ -4,8 +4,7 @@ import { FaMapMarkerAlt, FaCertificate, FaBullhorn, FaCar, FaDeezer, FaInfo } fr
 import React, { useState } from 'react';
 
 
-
-export default function Sidebar(){
+export default function Sidebar({setTabIndex}){
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -25,27 +24,27 @@ export default function Sidebar(){
                     </div>
                 </a>
                 <a>
-                    <div className={styles.sidebarLink}>
+                    <div onClick={() => setTabIndex(0)} className={styles.sidebarLink}>
                         <div className={styles.sidebarLinkLogo}><FaMapMarkerAlt /></div><div className={styles.sidebarLinkText}>Mapa</div>
                     </div>
                 </a>
                 <a>
-                    <div className={styles.sidebarLink}>
+                    <div onClick={() => setTabIndex(1)} className={styles.sidebarLink}>
                         <div className={styles.sidebarLinkLogo}><FaCertificate /></div><div className={styles.sidebarLinkText}>Rupe</div>
                     </div>
                 </a>
                 <a>
-                    <div className={styles.sidebarLink}>
+                    <div onClick={() => setTabIndex(2)} className={styles.sidebarLink}>
                         <div className={styles.sidebarLinkLogo}><FaBullhorn /></div><div className={styles.sidebarLinkText}>Obavestenja</div>
                     </div>
                 </a>
                 <a>
-                    <div className={styles.sidebarLink}>
+                    <div onClick={() => setTabIndex(3)} className={styles.sidebarLink}>
                         <div className={styles.sidebarLinkLogo}><FaCar /></div><div className={styles.sidebarLinkText}>Ulice</div>
                     </div>
                 </a>
                 <a>
-                    <div className={styles.sidebarLink}>
+                    <div onClick={() => setTabIndex(4)} className={styles.sidebarLink}>
                         <div className={styles.sidebarLinkLogo}><FaDeezer /></div><div className={styles.sidebarLinkText}>Statistika</div>
                     </div>
                 </a>
