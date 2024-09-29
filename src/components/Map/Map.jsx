@@ -18,7 +18,6 @@ export default function Map({holes, CAR_NUMBER, setHoles, reportHole, hidden}) {
             <h1 className={styles.maph1}>Mapa Grada</h1>
             <div className={styles.mapMainCont}>
                 <div className={styles.mapLeft}>
-                    
                     <div className={styles.statsWrapper}>
                         <h2 className={styles.maph2}>Broj Vozila</h2>
                         <p className={styles.mapText}>{CAR_NUMBER}</p>
