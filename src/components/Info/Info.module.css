@@ -30,6 +30,12 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    color: white;
+}
+.mapLeft ul {
+    padding-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 .statsWrapper {
     display: flex;
