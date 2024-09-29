@@ -62,6 +62,7 @@ class Car {
 
 		// Draw the red circle moving along the dots
 		this.p5.fill(this.red, this.green, this.blue);
+		this.p5.strokeWeight(0)
 		this.p5.circle(x, y, 10);
 		let L = this.p5.sqrt(this.p5.pow(this.currentPos.x - this.nextPos.x, 2) + this.p5.pow(this.currentPos.y - this.nextPos.y, 2))
 		// Increment t for smooth movement
@@ -99,8 +100,53 @@ class Car {
 	}
 }
 
+class Bus {
+	constructor(p5, holes, reportHole, p, speed) {
+		this.holes = holes;
+		this.reportHole = reportHole;
+		this.p5 = p5;
+		this.currentPos = p;
+		this.speed = speed;
+		let r = p5.floor(p5.random(0, this.currentPos.edges.length));
+		let next = this.currentPos.edges[r]
+		this.nextPos = points.find(p => p.id === next)
+		this.t = 0;
+	}
+	show() {
+		let x = this.p5.lerp(this.currentPos.x, this.nextPos.x, this.t);
+		let y = this.p5.lerp(this.currentPos.y, this.nextPos.y, this.t);
 
-export default function Street({ holes, setHoles, CAR_NUMBER }) {
+		// Draw the red circle moving along the dots
+        this.p5.strokeWeight(5)
+        this.p5.fill("red")
+		this.p5.stroke("blue")
+		this.p5.strokeWeight(5)
+        this.p5.circle(x, y, 20)
+		let L = this.p5.sqrt(this.p5.pow(this.currentPos.x - this.nextPos.x, 2) + this.p5.pow(this.currentPos.y - this.nextPos.y, 2))
+		// Increment t for smooth movement
+		this.t += this.speed * (100 / L);  // Adjust the speed if necessary
+
+        for (let h of this.holes) {
+            if (distance(h.x, h.y, x, y) < HOLE_DIST) {
+                this.reportHole(h)
+            }
+        }
+        
+
+		// Once t reaches 1, move to the next step
+		if (this.t >= 1) {
+			this.t = 0;
+			this.currentPos = this.nextPos;
+			let r = this.p5.floor(this.p5.random(0, this.currentPos.edges.length));
+			let next = this.currentPos.edges[r]
+			this.nextPos = points.find(p => p.id === next)
+		}
+	}
+}
+
+let bus;
+
+export default function Street({ holes, setHoles, CAR_NUMBER, reportHole, reportedHoles }) {
 	const [firstRender, setFirstRender] = React.useState(true)
 	const [p5, setP5] = React.useState(null)
 	useEffect(() => {
@@ -118,6 +164,8 @@ export default function Street({ holes, setHoles, CAR_NUMBER }) {
 		for (let i = 0; i < CAR_NUMBER; i++) {
 			cars.push(new Car(p5, holes, setHoles, true, points[p5.floor(p5.random(points.length))], p5.random(0.005, 0.01), p5.floor(p5.random(255)), p5.floor(p5.random(255)), p5.floor(p5.random(255))))
 		}
+		bus = new Bus(p5, holes, reportHole, points[p5.floor(p5.random(points.length))], 0.003)
+
 	}
 
 	const draw = (p5) => {
@@ -155,11 +203,13 @@ export default function Street({ holes, setHoles, CAR_NUMBER }) {
 			}
 			p5.textSize(15)
 			p5.textAlign(p5.CENTER, p5.CENTER)
+			p5.strokeWeight(0)
 			p5.text(t, hole.x, hole.y)
 		}
 		for (let car of cars) {
 			car.show()
 		}
+		bus.show()
 	}
 
 	return (

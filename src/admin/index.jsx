@@ -14,7 +14,12 @@ const components = [Map, Holes, News, Streets, Stats, Info]
 
 export default function Admin(){
     const [holes, setHoles] = useState([])
+    const [reportedHoles, setReportedHoles] = useState([])
     const [CAR_NUMBER, setCAR_NUMBER] = useState(20)
+
+    function reportHole(hole) {
+        setReportedHoles(reportedHoles => [...reportedHoles.filter(h => !(h.x === hole.x && h.y === hole.y)), hole])
+    }
 
     useEffect(() => { 
         const interval = setInterval(() => {
@@ -25,12 +30,12 @@ export default function Admin(){
     
     const [tabIndex, setTabIndex] = useState(0)
     let Component = components[tabIndex]
-
+    const props = {reportedHoles, reportHole, holes, CAR_NUMBER, setHoles}
     return(
         <>
             <Sidebar setTabIndex={setTabIndex} />
             <div className={styles.main}>
-                <Component holes={holes} setHoles={setHoles} CAR_NUMBER={CAR_NUMBER}/>
+                {components.map((C, i) => <C key={i} {...props} hidden={tabIndex !== i} />)}
             </div>
         </>
     );
