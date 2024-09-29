@@ -15,12 +15,7 @@ export default function Streets({hidden}){
         } : {}}>
             <h1 className={styles.maph1}>Posmatranje Ulica</h1>
             <div className={styles.mapMainCont}>
-                <div className={styles.mapLeft}>
                     In development...
-                </div>
-                <div className={styles.mapRight}>
-                    
-                </div>
             </div>
         </div>
     );

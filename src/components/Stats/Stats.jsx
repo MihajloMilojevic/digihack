@@ -16,12 +16,7 @@ export default function Stats({hidden}){
         } : {}}>
             <h1 className={styles.maph1}>Statistika</h1>
             <div className={styles.mapMainCont}>
-                <div className={styles.mapLeft}>
                     In development...
-                </div>
-                <div className={styles.mapRight}>
-                    
-                </div>
             </div>
         </div>
     );

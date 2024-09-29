@@ -14,8 +14,12 @@
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
 }
 .maph1{
     font-size: 42px;
@@ -25,13 +29,6 @@
     margin: 0 0 20px calc(12.5% + 5px);
 }
 
-.mapLeft{
-    padding: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    color: white;
-}
 .statsWrapper {
     display: flex;
     justify-content: space-between;

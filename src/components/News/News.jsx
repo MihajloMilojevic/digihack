@@ -21,8 +21,36 @@ export default function News({hidden}){
             <div className={styles.newsMain}>
                 <div className={styles.newsCont}>
                     <div className={styles.newsLeft}>
-                        <div className={styles.newsTitle}>Naslov obavestenja</div>
-                        <div className={styles.newsText}>Tekst: izasla je nova rupa idi resi to odmah!</div>
+                        <div className={styles.newsTitle}>Pronadjena nova rupa!</div>
+                        <div className={styles.newsText}>Sistem je detektovao novu rupu na Bulevaru Evrope. Molimo vas da obratite pažnju i sanirate je na vreme! Hvala.</div>
+                    </div>
+                    <div className={styles.newsRight}><div className={styles.newsRightDot}></div></div>
+                </div>
+                <div className={styles.newsCont}>
+                    <div className={styles.newsLeft}>
+                        <div className={styles.newsTitle}>Veliki broj nepravilnosti na Bulevaru cara Lazara</div>
+                        <div className={styles.newsText}> Molimo vas da obratite pažnju i otklonite problem! Hvala.</div>
+                    </div>
+                    <div className={styles.newsRight}><div className={styles.newsRightDot}></div></div>
+                </div>
+                <div className={styles.newsCont}>
+                    <div className={styles.newsLeft}>
+                        <div className={styles.newsTitle}>Opasnost!</div>
+                        <div className={styles.newsText}>Rupa na Bulevaru Patrijarha Pavla!</div>
+                    </div>
+                    <div className={styles.newsRight}><div className={styles.newsRightDot}></div></div>
+                </div>
+                <div className={styles.newsCont}>
+                    <div className={styles.newsLeft}>
+                        <div className={styles.newsTitle}>Obaveštenje</div>
+                        <div className={styles.newsText}>Uspešno je sanirana rupa na Bulevaru Slobodana Jovanovića!</div>
+                    </div>
+                    <div className={styles.newsRight}><div className={styles.newsRightDotGreen}></div></div>
+                </div>
+                <div className={styles.newsCont}>
+                    <div className={styles.newsLeft}>
+                        <div className={styles.newsTitle}>Opasnost!</div>
+                        <div className={styles.newsText}>Oštećenje puta na Bulevaru Evrope se povećalo!</div>
                     </div>
                     <div className={styles.newsRight}><div className={styles.newsRightDot}></div></div>
                 </div>
