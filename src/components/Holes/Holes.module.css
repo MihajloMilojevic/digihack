@@ -28,15 +28,21 @@
 .mapLeft{
     padding: 20px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: flex; 
+    flex-direction: row;
+}
+.mapLeftLeft, .mapLeftRight{
+    width: 100%;
 }
 .statsWrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    margin: 10px 0;
+    height: fit-content;
+    background-color: #ffffff7e;
+    margin: 10px;
+    padding: 25px;
+    border-radius: 10px;
 }
 .maph2{
     font-size: 23px;

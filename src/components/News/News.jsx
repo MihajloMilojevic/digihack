@@ -54,6 +54,13 @@ export default function News({hidden}){
                     </div>
                     <div className={styles.newsRight}><div className={styles.newsRightDot}></div></div>
                 </div>
+                <div className={styles.newsCont}>
+                    <div className={styles.newsLeft}>
+                        <div className={styles.newsTitle}>Opasnost!</div>
+                        <div className={styles.newsText}>Detektovano je oštećenje puta na Bulevaru cara Lazara!</div>
+                    </div>
+                    <div className={styles.newsRight}><div className={styles.newsRightDot}></div></div>
+                </div>
             </div>
         </div>
     );
