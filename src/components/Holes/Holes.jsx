@@ -1,7 +1,7 @@
 import styles from "./Holes.module.css";
 import HolesMap from "../street/Holes";
 
-export default function Holes({holes, reportHole, reportedHoles, CAR_NUMBER, setHoles, hidden}){
+export default function Holes({holes, reportHole, reportedHoles, CAR_NUMBER, setHoles, fixHole, hidden}){
     return(
         <div className={styles.mapMain} style={hidden ? {
             "visibility": "hidden",
@@ -40,7 +40,7 @@ export default function Holes({holes, reportHole, reportedHoles, CAR_NUMBER, set
                     </div>
                 </div>
                 <div className={styles.mapRight}>
-                    <HolesMap reportedHoles={reportedHoles} />
+                    <HolesMap reportedHoles={reportedHoles} fixHole={fixHole} />
                 </div>
             </div>
         </div>

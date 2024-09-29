@@ -21,6 +21,13 @@ export default function Admin(){
         setReportedHoles(reportedHoles => [...reportedHoles.filter(h => !(h.x === hole.x && h.y === hole.y)), hole])
     }
 
+    function fixHole(hole) {
+        setHoles(holes => {
+            console.log(holes.length, holes.filter(h => !(h.x === hole.x && h.y === hole.y)).length)
+            return holes.filter(h => !(h.x === hole.x && h.y === hole.y))});
+        setReportedHoles(reportedHoles => reportedHoles.filter(h => !(h.x === hole.x && h.y === hole.y)));
+    }
+
     useEffect(() => { 
         const interval = setInterval(() => {
             setCAR_NUMBER(CAR_NUMBER => Math.min(CAR_NUMBER + 1, 45))
@@ -30,7 +37,7 @@ export default function Admin(){
     
     const [tabIndex, setTabIndex] = useState(0)
     let Component = components[tabIndex]
-    const props = {reportedHoles, reportHole, holes, CAR_NUMBER, setHoles}
+    const props = {reportedHoles, reportHole, holes, CAR_NUMBER, setHoles, fixHole}
     return(
         <>
             <Sidebar setTabIndex={setTabIndex} />
