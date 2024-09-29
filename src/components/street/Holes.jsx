@@ -42,7 +42,7 @@ const points = [
 
 
 
-export default function HolesMap({ reportedHoles }) {
+export default function HolesMap({ reportedHoles, fixHole }) {
 	
 	const setup = (p5, canvasParentRef) => {
 		p5.createCanvas(500, 500).parent(canvasParentRef);
@@ -88,7 +88,25 @@ export default function HolesMap({ reportedHoles }) {
 		}
 	}
 
+	const doubleClicked = (p5) => {
+		let x = p5.mouseX;
+		let y = p5.mouseY;
+		if (reportedHoles.length === 0) return;
+		let closest = reportedHoles[0];
+		let minDist = distance(x, y, closest.x, closest.y);
+		for (let hole of reportedHoles) {
+			let dist = distance(x, y, hole.x, hole.y);
+			if (dist < minDist) {
+				minDist = dist;
+				closest = hole;
+			}
+		}
+		if (minDist < 20) {
+			fixHole(closest);
+		}
+	}
+
 	return (
-		<Sketch setup={setup} draw={draw} />
+		<Sketch setup={setup} draw={draw} doubleClicked={doubleClicked} />
 	)
 }

@@ -70,23 +70,25 @@ class Car {
 
 		const holeee_q = this.p5.random()
 		if (holeee_q <= HOLE_PROB && this.checkHoles) {
-			let closest = null;
-			for (let h of this.holes) {
-				if (closest == null) {
-					closest = h;
-					continue;
+			this.setHoles((holes) => {
+				let closest = null;
+				for (let h of holes) {
+					if (closest == null) {
+						closest = h;
+						continue;
+					}
+					if (distance(h.x, h.y, x, y) < distance(closest.x, closest.y, x, y)) {
+						closest = h;
+					}
 				}
-				if (distance(h.x, h.y, x, y) < distance(closest.x, closest.y, x, y)) {
-					closest = h;
+				if (closest != null && distance(closest.x, closest.y, x, y) < HOLE_DIST) {
+					closest.severity++;
 				}
-			}
-			if (closest != null && distance(closest.x, closest.y, x, y) < HOLE_DIST) {
-				closest.severity++;
-			}
-			else {
-				this.holes.push({ x, y, severity: 1 })
-			}
-			this.setHoles([...this.holes])
+				else {
+					holes.push({ x, y, severity: 1 })
+				}
+				return [...holes];
+			})
 		}
 
 		// Once t reaches 1, move to the next step
@@ -112,7 +114,7 @@ class Bus {
 		this.nextPos = points.find(p => p.id === next)
 		this.t = 0;
 	}
-	show() {
+	show(holes) {
 		let x = this.p5.lerp(this.currentPos.x, this.nextPos.x, this.t);
 		let y = this.p5.lerp(this.currentPos.y, this.nextPos.y, this.t);
 
@@ -126,7 +128,7 @@ class Bus {
 		// Increment t for smooth movement
 		this.t += this.speed * (100 / L);  // Adjust the speed if necessary
 
-        for (let h of this.holes) {
+        for (let h of holes) {
             if (distance(h.x, h.y, x, y) < HOLE_DIST) {
                 this.reportHole(h)
             }
@@ -209,7 +211,7 @@ export default function Street({ holes, setHoles, CAR_NUMBER, reportHole, report
 		for (let car of cars) {
 			car.show()
 		}
-		bus.show()
+		bus.show(holes)
 	}
 
 	return (
